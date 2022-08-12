@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  apache:
+    build: ./apache
+    depends_on:
+      - mysql
+    environment:
+      - VIRTUAL_HOST=$APP_URL
+
+  mysql:
+    build: ./mysql
+    volumes:
+      - ./mysql/save_data:/var/lib/mysql
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - MYSQL_DATABASE=$DATABASE
+      - MYSQL_USER=$DATABASE_USER
+      - MYSQL_PASSWORD=$DATABASE_PASSWORD
+  
+  phpmyadmin:
+    depends_on:
+      - mysql
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_HOST=mysql
+      - VIRTUAL_HOST=$APP_PHPMYADMIN_URL
+    restart: always
+    ports:
+      - "8080:80"
+
+networks:
+  default:
+    external: true
+    name: rori-stack
