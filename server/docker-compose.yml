@@ -3,6 +3,8 @@ version: '3'
 services:
   apache:
     build: ./apache
+    volumes:
+      - ./apache/html:/var/www/html
     depends_on:
       - mysql
     environment:

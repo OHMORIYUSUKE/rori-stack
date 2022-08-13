@@ -1,3 +1,11 @@
 # rori-stack
 
-http://rori-stack.ddo.jp/
+レンタルサーバーもどき
+
+---
+
+めも
+
+```sh
+echo "SET PASSWORD = 'user02password';" | mysql -puser02pass -uuser02
+```
