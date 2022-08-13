@@ -28,8 +28,6 @@ services:
       - PMA_HOST=mysql
       - VIRTUAL_HOST=$APP_PHPMYADMIN_URL
     restart: always
-    ports:
-      - "8080:80"
 
 networks:
   default:
