@@ -19,3 +19,11 @@ ENV PYTHONDONTWRITEBYTECODE 1
 WORKDIR /src/app/rori-stack-secure
 
 RUN poetry config virtualenvs.create true
+
+COPY /rori-stack-secure .
+
+RUN poetry install
+
+EXPOSE 8000
+
+CMD [ "poetry", "run", "uvicorn", "rori_stack_secure.main:app", "--reload", "--host", "0.0.0.0" ,"--port" ,"8000" ]
