@@ -3,6 +3,7 @@ version: '3'
 services:
   apache:
     build: ./apache
+    image: rori_stack_apache
     volumes:
       - ./apache/html:/var/www/html
     depends_on:
@@ -12,6 +13,7 @@ services:
 
   mysql:
     build: ./mysql
+    image: rori_stack_mysql
     volumes:
       - ./mysql/save_data:/var/lib/mysql
     environment:

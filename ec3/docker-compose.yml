@@ -1,0 +1,29 @@
+version: '3'
+ 
+services:
+  test:
+    build: ./
+    tty: true
+    command: /sbin/init && service ssh start
+    privileged: true
+    ports:
+      # ssh
+      - 22:22
+      # mail
+      - 25:25
+      - 587:587
+      - 465:465
+      - 2525:2525
+      # mysql
+      - 3306:3306
+      # postgress
+      - 5432:5432
+      # redis
+      - 6379:6379
+    environment:
+      - VIRTUAL_HOST=$APP_URL
+
+networks:
+  default:
+    external: true
+    name: rori-stack
