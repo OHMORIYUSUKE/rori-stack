@@ -3,6 +3,10 @@
 レンタルサーバーもどき
 
 ```sh
+$ ssh root@u-tan.ec3.example.local -i ~/.ssh/github
+```
+
+```sh
 $ apt update
 $ apt install apache2
 $ systemctl status apache2
@@ -16,6 +20,20 @@ $ apt install nginx
 $ systemctl start nginx
 ```
 
+vim 文字化け
+
+```sh
+$ export LANG=C.UTF-8
+```
+
 docker install
 
 https://qiita.com/wakki_haya/items/a00ecdc231e131b4d18d
+
+```sh
+nginx-proxy/$ docker compose up -d
+ec3/$ docker build ./ -t rori_stack/ec3
+$ docker run --detach -t -i --privileged --name rori_stack_ec3_u-tan --network=rori-stack  -p 25:25 -p 22:22 -p 3306:3306 --env VIRTUAL_HOST=u-tan.ec3.example.local --env LANG=C.UTF-8 rori_stack/ec3
+
+$ docker container rm -f rori_stack_ec3_u-tan
+```

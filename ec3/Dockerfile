@@ -1,7 +1,5 @@
 FROM ubuntu:18.04
 
-ENV LC_ALL C.UTF-8
-
 # setup requirements packages
 RUN apt update -y && \
     apt install -y init && \
@@ -16,7 +14,17 @@ RUN apt-get update && \
     sed -i "s/#PubkeyAuthentication yes/PubkeyAuthentication yes/" /etc/ssh/sshd_config
 
 # Register public key
-ADD id_rsa.pub /root/.ssh/
-RUN mv /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys && \
-    chmod 700 /root/.ssh && \
-    chmod 600 /root/.ssh/authorized_keys
+# ADD id_rsa.pub /root/.ssh/
+# RUN mv /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys && \
+#     chmod 700 /root/.ssh && \
+#     chmod 600 /root/.ssh/authorized_keys
+
+# 日本語対応
+# ENV LANG C.UTF-8
+
+# vim & curl
+RUN apt update -y && \
+    apt install curl -y && \
+    apt install vim -y
+
+CMD [ "/sbin/init", "&&", "service", "ssh", "start" ]

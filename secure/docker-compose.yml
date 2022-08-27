@@ -7,7 +7,7 @@ services:
     tty: true
     volumes:
       - ./app:/src/app
-      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - /var/run/docker.sock:/var/run/docker.sock
   
   nginx:
     image: nginx:alpine
@@ -15,7 +15,6 @@ services:
       - web
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
-      - /var/run/docker.sock:/tmp/docker.sock:ro
     environment:
       - VIRTUAL_HOST=$APP_URL
 

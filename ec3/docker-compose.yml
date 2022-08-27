@@ -1,10 +1,9 @@
 version: '3'
- 
+
 services:
   test:
     build: ./
     tty: true
-    command: /sbin/init && service ssh start
     privileged: true
     ports:
       # ssh
