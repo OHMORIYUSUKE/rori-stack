@@ -1,0 +1,18 @@
+version: "3.0"
+
+services:
+  ssh:
+    build: ./src
+    tty: true
+    privileged: true
+    ports:
+      - 22:22
+    volumes:
+      - ../share-volume/ssh-server:/ssh-server
+    environment:
+      - VIRTUAL_HOST=$APP_URL
+
+networks:
+  default:
+    external: true
+    name: rori-stack
