@@ -8,7 +8,7 @@ services:
     ports:
       - 22:22
     volumes:
-      - ../share-volume/ssh-server:/ssh-server
+      # - ../share-volume/ssh-server:/ssh-server
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - VIRTUAL_HOST=$APP_URL

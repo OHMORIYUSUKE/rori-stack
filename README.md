@@ -38,34 +38,14 @@ $ docker run --detach -t -i --privileged --name rori_stack_ec3_u-tan --network=r
 $ docker container rm -f rori_stack_ec3_u-tan
 ```
 
-ssh メモ
-コンテナ内でユーザーごとに実行する
-
-echo 'screencast\n' | sudo -S docker ps
+手順
 
 ```sh
+# sshサーバー起動初回のみ
+$ docker cp ./share-volume/ssh-server ssh-server-ssh-1:/ssh-server
+$ docker exec ssh-server-ssh-1 sh //ssh-server/init.sh u-tan
+# ユーザー追加時
+$ docker cp ./share-volume/ssh-server ssh-server-ssh-1:/ssh-server
 $ docker exec ssh-server-ssh-1 sh //ssh-server/ssh-key-register.sh u-tan u-tan-password
 $ docker exec ssh-server-ssh-1 sh //ssh-server/set-first-cmd.sh u-tan
-```
-
-sudo 追加
-
-```sh
-$ usermod -aG sudo u-tan
-```
-
-docker コンテナ接続
-
-```sh
-echo 'password'  | sudo -S docker exec -t ssh-server-ssh-1 bash
-```
-
-```sh
-$ chmod 777 /var/run/docker.sock
-$ usermod -a -G docker u-tan
-```
-
-```sh
-$ chmod 711 /home
-$ chmod 755 /ssh-server
 ```
