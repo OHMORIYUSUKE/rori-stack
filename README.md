@@ -3,7 +3,7 @@
 レンタルサーバーもどき
 
 ```sh
-$ ssh root@u-tan.ec3.example.local -i ~/.ssh/github
+$ ssh u-tan@ssh.example.local -i ~/.ssh/github
 ```
 
 ```sh
@@ -41,9 +41,31 @@ $ docker container rm -f rori_stack_ec3_u-tan
 ssh メモ
 コンテナ内でユーザーごとに実行する
 
+echo 'screencast\n' | sudo -S docker ps
+
 ```sh
-$ useradd -p $(perl -e 'print crypt("password", "\$6\$salt03")') u-tan
-$ mkdir -p /home/u-tan/.ssh
-$ cp /ssh-server/user-keys/u-tan/id_rsa.pub /home/u-tan/.ssh/id_rsa.pub
-$ cat /home/u-tan/.ssh/id_rsa.pub >> /home/u-tan/.ssh/authorized_keys
+$ docker exec ssh-server-ssh-1 sh //ssh-server/ssh-key-register.sh u-tan u-tan-password
+$ docker exec ssh-server-ssh-1 sh //ssh-server/set-first-cmd.sh u-tan
+```
+
+sudo 追加
+
+```sh
+$ usermod -aG sudo u-tan
+```
+
+docker コンテナ接続
+
+```sh
+echo 'password'  | sudo -S docker exec -t ssh-server-ssh-1 bash
+```
+
+```sh
+$ chmod 777 /var/run/docker.sock
+$ usermod -a -G docker u-tan
+```
+
+```sh
+$ chmod 711 /home
+$ chmod 755 /ssh-server
 ```
