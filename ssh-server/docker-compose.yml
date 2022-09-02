@@ -1,20 +1,15 @@
 version: "3.0"
 
 services:
-  web:
-    build: ./app
-    restart: always
+  ssh:
+    build: ./src
     tty: true
+    # privileged: true
+    ports:
+      - 22:22
     volumes:
-      - ./app:/src/app
+      - ../share-volume/ssh-server:/ssh-server
       - /var/run/docker.sock:/var/run/docker.sock
-  
-  nginx:
-    image: nginx:alpine
-    depends_on:
-      - web
-    volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d
     environment:
       - VIRTUAL_HOST=$APP_URL
 
