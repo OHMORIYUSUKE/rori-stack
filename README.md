@@ -30,22 +30,9 @@ docker install
 
 https://qiita.com/wakki_haya/items/a00ecdc231e131b4d18d
 
-```sh
-nginx-proxy/$ docker compose up -d
-ec3/$ docker build ./ -t rori_stack/ec3
-$ docker run --detach -t -i --privileged --name rori_stack_ec3_u-tan --network=rori-stack --env VIRTUAL_HOST=u-tan.ec3.example.local --env LANG=C.UTF-8 rori_stack/ec3
-
-$ docker container rm -f rori_stack_ec3_u-tan
-```
-
 手順
 
 ```sh
 # sshサーバー起動初回のみ
-$ docker cp ./share-volume/ssh-server ssh-server-ssh-1:/ssh-server
-$ docker exec ssh-server-ssh-1 sh //ssh-server/init.sh u-tan
-# ユーザー追加時
-$ docker cp ./share-volume/ssh-server ssh-server-ssh-1:/ssh-server
-$ docker exec ssh-server-ssh-1 sh //ssh-server/ssh-key-register.sh u-tan u-tan-password
-$ docker exec ssh-server-ssh-1 sh //ssh-server/set-first-cmd.sh u-tan
+$ sh make.sh
 ```

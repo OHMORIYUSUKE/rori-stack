@@ -8,6 +8,8 @@ services:
       - 80:80
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./html/custom_pages:/etc/nginx/html/custom_pages
+      # - ./conf.d/default.conf:/etc/nginx/conf.d/default.conf
 
 networks:
   default:

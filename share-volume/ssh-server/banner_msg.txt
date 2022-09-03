@@ -1,0 +1,21 @@
+      __________...----..____..-'``-..___
+    ,'.                                  ```--.._
+   :                                             ``._
+   |                           --                    ``.
+   |                   -.-      -.     -   -.        `.
+   :                     __           --            .     \
+    `._____________     (  `.   -.-      --  -   .   `     \
+       `-----------------\   \_.--------..__..--.._ `. `.   :
+                          `--'     SSt             `-._ .   |
+                                                       `.`  |
+                                                         \` |
+                                                          \ |
+                                                          / \`.
+                                                         /  _\-'
+                                                        /_,'
+
+# EC3
+
+## OS : ubuntu:20.04
+
+It is a container-based Linux virtual environment. Port forwarding is only on port 80. Let's publish a web application. You can use the systemctl command.
