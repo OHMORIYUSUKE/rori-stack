@@ -6,11 +6,14 @@ app_name=$1
 echo "既存の環境を消す"
 docker container rm -f ssh-server-ssh-1
 docker container rm -f nginx-proxy-nginx-proxy-1
-docker container rm -f rori_stack_ec3_$app_name
 
 # docker 
+echo "ec3のイメージ作成"
+docker image rm -f rori_stack/ec3
+cd ec3/
+docker build ./ -t rori_stack/ec3
 echo "インフラコンテナ起動"
-cd nginx-proxy/
+cd ../nginx-proxy/
 docker compose up -d
 cd ../ssh-server/
 docker compose up -d

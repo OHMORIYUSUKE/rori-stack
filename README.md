@@ -20,6 +20,13 @@ $ apt install nginx
 $ systemctl start nginx
 ```
 
+mysql
+
+```sh
+$ sudo touch /var/run/mysqld/mysqld.sock
+$ sudo mysql -u root
+```
+
 vim 文字化け
 
 ```sh

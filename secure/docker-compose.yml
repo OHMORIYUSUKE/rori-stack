@@ -7,6 +7,8 @@ services:
     tty: true
     volumes:
       - ./app:/src/app
+      - ./../share-volume/ec3:/src/app/rori-stack-secure/rori_stack_secure/shell/ec3
+      - ./../share-volume/ssh-server:/src/app/rori-stack-secure/rori_stack_secure/shell/ssh-server
       - /var/run/docker.sock:/var/run/docker.sock
   
   nginx:
