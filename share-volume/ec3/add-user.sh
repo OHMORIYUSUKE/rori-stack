@@ -7,6 +7,7 @@ useradd -p $(perl -e 'print crypt("$var", "\$6\$salt03")' -- -var=$user_password
 mkdir -p /home/$user_name
 echo "root:$user_password" | chpasswd
 echo "$user_name:$user_password" | chpasswd
+echo "cd /home/$user_name" >> /home/$user_name/.bashrc
 
 usermod -aG sudo $user_name
 
