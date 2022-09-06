@@ -2,6 +2,10 @@
 
 レンタルサーバーもどき
 
+## 構成図
+
+![構成図](./docs/images/structure.png)
+
 ## 開発環境
 
 ### windowsの場合
