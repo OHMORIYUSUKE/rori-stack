@@ -3,7 +3,15 @@
 レンタルサーバーもどき
 
 ```sh
-$ ssh u-tan@ssh.example.local -i ~/.ssh/github
+$ ssh u-tan@ssh.example.local -i ~/.ssh/u-tan
+```
+```json
+{
+  "user_password": "u-tan-password",
+  "user_name": "u-tan",
+  "app_name": "u-tan-app",
+  "ssh_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDLO+vEs9KkiiIuSql+HGg20+TIhtOMobn0SiAP7qP+oE/R2pNUfmCuaMtuBs/yrF+EXyWs+kJm06Wz+cWx2ibu6uL2YYgRsWGjoGNfeCPBYblWtBV5JijqcnncQrbFpw7ovCqjS7kS4zu0Syf3f3AQzZdIs2CO0eRyoYyYZdK9HOrDa7jFf6GpmQTocMwxUyodw/tkSk4hZO1k3Fo+0atqk4o5KncwQ94FR+aFDbGBOFuE3MQRAcAYzQkgWbs0ur0NudjIKi4WY1shr4PF+2Dg1APD0r1z52TdtI178qL+Dod4neiazvtEr/Sc8X/nv5L7jq35GzuqNxgYb0c2BoPkXScfRsWxlrbdWd9WcXh0DfHfVvLKlxYBNvK79MyaAX8eqLTVVTW1HAsAwXanuklZ/6aqCBwZKtC1cTstACCHtvdqjdzvsR+sWyR3Bb6fdWN9v/K/aNoIoTTSGSQ3Yzwssg2j3UZFk1BCDavybHS9qSkIbOcbMgDTTmLIFyQjyU8= 81908@LAPTOP-SALKU03L"
+}
 ```
 
 ```sh

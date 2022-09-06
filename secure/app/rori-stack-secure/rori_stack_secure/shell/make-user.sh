@@ -15,7 +15,6 @@ docker exec ssh-server-ssh-1 sh //ssh-server/ssh-key-register.sh $user_name $use
 docker restart ssh-server-ssh-1
 
 echo "ユーザーサーバーにユーザーを追加(not root login)"
-# ここがバツ
 docker cp /src/app/rori-stack-secure/rori_stack_secure/shell/ec3 rori_stack_ec3_$app_name:/etc/
 docker exec rori_stack_ec3_$app_name sh //etc/ec3/add-user.sh $user_name $user_password
 

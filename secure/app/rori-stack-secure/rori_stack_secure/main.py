@@ -22,7 +22,7 @@ async def root():
 
 # 設定画面
 @app.post("/create/container")
-async def setting(userContainerInfo: UserContainerInfo):
+async def create_container(userContainerInfo: UserContainerInfo):
     # ssh鍵書き込み
     PWD = "/src/app/rori-stack-secure/rori_stack_secure"
     os.makedirs(f'{PWD}/shell/ssh-server/user-keys/{userContainerInfo.user_name}', exist_ok=True)
@@ -33,6 +33,20 @@ async def setting(userContainerInfo: UserContainerInfo):
     proc = subprocess.run(f"sh {PWD}/shell/make-user.sh {userContainerInfo.user_name} {userContainerInfo.user_password} {userContainerInfo.app_name}", timeout=100, shell=True, stdout=PIPE, stderr=PIPE, text=True)
     out = proc.stdout
     err = proc.stderr
+    if out != '':
+        return {"result": "success"}
+    else:
+        return {"result": "error"}
+
+@app.post("/delete/container")
+async def create_container(userContainerInfo: UserContainerInfo):
+    # 認証
+    # コンテナ削除
+    PWD = "/src/app/rori-stack-secure/rori_stack_secure"
+    proc = subprocess.run(f"sh {PWD}/shell/rm-container.sh {userContainerInfo.app_name}", timeout=100, shell=True, stdout=PIPE, stderr=PIPE, text=True)
+    out = proc.stdout
+    err = proc.stderr
+    print(out)
     if out != '':
         return {"result": "success"}
     else:

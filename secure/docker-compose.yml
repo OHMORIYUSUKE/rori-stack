@@ -20,6 +20,30 @@ services:
     environment:
       - VIRTUAL_HOST=$APP_URL
 
+  mysql:
+    build: ./mysql
+    volumes:
+      - ./mysql/save_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PW}"
+      MYSQL_DATABASE: "${DB_NAME}"
+      MYSQL_USER: "${DB_USER_NAME}"
+      MYSQL_PASSWORD: "${DB_USER_PW}"
+      MYSQL_ROOT_HOST: "%"
+      TZ: "${TZ}"
+  
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOST: mysql
+      PMA_USER: "${DB_USER_NAME}"
+      PMA_PASSWORD: "${DB_USER_PW}"
+      VIRTUAL_HOST: "${PHPMYADMIN_URL}"
+    restart: always
+    depends_on:
+      - mysql
+
 networks:
   default:
     external: true
