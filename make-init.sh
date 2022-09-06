@@ -17,6 +17,8 @@ cd ../nginx-proxy/
 docker compose up -d
 cd ../ssh-server/
 docker compose up -d
+cd ../secure/
+docker compose up -d
 
 # init
 

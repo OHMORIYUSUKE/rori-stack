@@ -2,9 +2,42 @@
 
 レンタルサーバーもどき
 
+## 開発環境
+
+### windowsの場合
+
+#### コンテナを起動
+
 ```sh
-$ ssh u-tan@ssh.example.local -i ~/.ssh/u-tan
+$ git clone git@github.com:OHMORIYUSUKE/rori-stack.git
+$ cd rori-stack
+$ sh make.sh
 ```
+
+#### hostsファイルを編集
+
+```hosts
+127.0.0.1 app.secure.example.local
+127.0.0.1 phpmyadmin.secure.example.local
+127.0.0.1 u-tan-app.ec3.example.local
+127.0.0.1 ssh.example.local
+```
+
+上記を追記する。
+
+#### SSH鍵を作る
+
+```sh
+$ cd ~/.ssh
+$ ssh-keygen -f u-tan
+```
+
+#### 試す
+
+`http://app.secure.example.local/docs`にアクセス
+
+create/containerに以下のようなjsonを入力する。`ssh_key`は`cat ~/.ssh/u-tan.pub`の値に差し替える。
+
 ```json
 {
   "user_password": "u-tan-password",
@@ -14,40 +47,52 @@ $ ssh u-tan@ssh.example.local -i ~/.ssh/u-tan
 }
 ```
 
+loadingが終わったら、コンテナにSSHをする。以下のコマンドを入力する。
+
 ```sh
-$ apt update
-$ apt install apache2
+$ ssh u-tan@ssh.example.local -i ~/.ssh/u-tan
+```
+
+コンテナに入れたら成功。
+
+#### WEBサーバーをコンテナ内で動かす
+
+コンテナ内でapacheかnginxを起動する。sudoで聞かれるパスワードは`u-tan-password`と入力する。
+
+```sh
+$ sudo apt update
+# apache install
+$ sudo apt install apache2
 $ systemctl status apache2
 ● apache2.service - The Apache HTTP Server
    Loaded: loaded (/lib/systemd/system/apache2.service; enabled; vendor preset: enabled)
   Drop-In: /lib/systemd/system/apache2.service.d
            └─apache2-systemd.conf
    Active: inactive (dead)
-$ systemctl start apache2
-$ apt install nginx
-$ systemctl start nginx
+$ sudo systemctl start apache2
+# nginx install
+$ sudo apt install nginx
+$ sudo systemctl start nginx
 ```
 
-mysql
+完了したら、ブラウザから`http://u-tan-app.ec3.example.local`にアクセス。インストールしたWEBサーバーが表示されたら成功。
+
+### おかしな挙動の解決策
+
+#### mysql
+
+mysqlインストール後に以下を行うとmysqlコンソールに入れる。
 
 ```sh
 $ sudo touch /var/run/mysqld/mysqld.sock
 $ sudo mysql -u root
 ```
 
-vim 文字化け
+#### vim
+
+vim 文字化けの解消
 
 ```sh
 $ export LANG=C.UTF-8
 ```
 
-docker install
-
-https://qiita.com/wakki_haya/items/a00ecdc231e131b4d18d
-
-手順
-
-```sh
-# sshサーバー起動初回のみ
-$ sh make.sh
-```
