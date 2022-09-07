@@ -8,17 +8,22 @@
 
 ## 開発環境
 
-### windowsの場合
+### windows の場合
 
 #### コンテナを起動
 
 ```sh
+# git clone
 $ git clone git@github.com:OHMORIYUSUKE/rori-stack.git
 $ cd rori-stack
+# .envを作成
+$ cp ./secure/.env.sample ./secure/.env
+$ cp ./ssh-server/.env.sample ./ssh-server/.env
+# 必要なコンテナを作成
 $ sh make.sh
 ```
 
-#### hostsファイルを編集
+#### hosts ファイルを編集
 
 ```hosts
 127.0.0.1 app.secure.example.local
@@ -29,7 +34,7 @@ $ sh make.sh
 
 上記を追記する。
 
-#### SSH鍵を作る
+#### SSH 鍵を作る
 
 ```sh
 $ cd ~/.ssh
@@ -40,7 +45,7 @@ $ ssh-keygen -f u-tan
 
 `http://app.secure.example.local/docs`にアクセス
 
-create/containerに以下のようなjsonを入力する。`ssh_key`は`cat ~/.ssh/u-tan.pub`の値に差し替える。
+create/container に以下のような json を入力する。`ssh_key`は`cat ~/.ssh/u-tan.pub`の値に差し替える。
 
 ```json
 {
@@ -51,7 +56,7 @@ create/containerに以下のようなjsonを入力する。`ssh_key`は`cat ~/.s
 }
 ```
 
-loadingが終わったら、コンテナにSSHをする。以下のコマンドを入力する。
+loading が終わったら、コンテナに SSH をする。以下のコマンドを入力する。
 
 ```sh
 $ ssh u-tan@ssh.example.local -i ~/.ssh/u-tan
@@ -59,9 +64,9 @@ $ ssh u-tan@ssh.example.local -i ~/.ssh/u-tan
 
 コンテナに入れたら成功。
 
-#### WEBサーバーをコンテナ内で動かす
+#### WEB サーバーをコンテナ内で動かす
 
-コンテナ内でapacheかnginxを起動する。sudoで聞かれるパスワードは`u-tan-password`と入力する。
+コンテナ内で apache か nginx を起動する。sudo で聞かれるパスワードは`u-tan-password`と入力する。
 
 ```sh
 $ sudo apt update
@@ -79,13 +84,13 @@ $ sudo apt install nginx
 $ sudo systemctl start nginx
 ```
 
-完了したら、ブラウザから`http://u-tan-app.ec3.example.local`にアクセス。インストールしたWEBサーバーが表示されたら成功。
+完了したら、ブラウザから`http://u-tan-app.ec3.example.local`にアクセス。インストールした WEB サーバーが表示されたら成功。
 
 ### おかしな挙動の解決策
 
 #### mysql
 
-mysqlインストール後に以下を行うとmysqlコンソールに入れる。
+mysql インストール後に以下を行うと mysql コンソールに入れる。
 
 ```sh
 $ sudo touch /var/run/mysqld/mysqld.sock
@@ -99,4 +104,3 @@ vim 文字化けの解消
 ```sh
 $ export LANG=C.UTF-8
 ```
-
