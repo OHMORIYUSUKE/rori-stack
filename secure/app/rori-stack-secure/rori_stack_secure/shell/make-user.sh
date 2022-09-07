@@ -6,7 +6,7 @@ app_name=$3
 
 # コンテナ作成
 echo "ユーザーコンテナを作成"
-docker run --detach -h "$app_name" -t -i --privileged --name rori_stack_ec3_$app_name --network=rori-stack --env VIRTUAL_HOST=$app_name.ec3.example.local --env LANG=C.UTF-8 rori_stack/ec3
+docker run --detach -h "rori-stack-ec3-$app_name" -t -i --privileged --name rori_stack_ec3_$app_name --network=rori-stack --env VIRTUAL_HOST=$app_name.ec3.example.local --env LANG=C.UTF-8 rori_stack/ec3
 
 # ユーザー作成
 echo "SSHサーバーにユーザーを追加"
