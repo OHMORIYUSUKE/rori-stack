@@ -2,7 +2,7 @@
 user_name=$1
 user_password=$2
 
-useradd -p $(perl -e 'print crypt("$var", "\$6\$salt03")' -- -var=$user_password) $user_name
+useradd $user_name
 usermod -a -G docker $user_name
 mkdir -p /home/$user_name/.ssh
 cp /ssh-server/user-keys/$user_name/id_rsa.pub /home/$user_name/.ssh/id_rsa.pub

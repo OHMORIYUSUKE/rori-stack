@@ -25,8 +25,8 @@ async def root():
 async def create_container(userContainerInfo: UserContainerInfo):
     # ssh鍵書き込み
     PWD = "/src/app/rori-stack-secure/rori_stack_secure"
-    os.makedirs(f'{PWD}/shell/ssh-server/user-keys/{userContainerInfo.user_name}', exist_ok=True)
-    f = open(f'{PWD}/shell/ssh-server/user-keys/{userContainerInfo.user_name}/id_rsa.pub', 'w')
+    os.makedirs(f'/share-volume/ssh-server/user-keys/{userContainerInfo.user_name}', exist_ok=True)
+    f = open(f'/share-volume/ssh-server/user-keys/{userContainerInfo.user_name}/id_rsa.pub', 'w')
     f.write(f'command="docker exec -u {userContainerInfo.user_name} -it rori_stack_ec3_{userContainerInfo.app_name} bash" {userContainerInfo.ssh_key}')
     f.close()
     # コンテナ起動

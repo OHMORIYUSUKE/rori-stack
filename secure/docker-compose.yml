@@ -7,10 +7,10 @@ services:
     tty: true
     volumes:
       - ./app:/src/app
-      - ./../share-volume/ec3:/src/app/rori-stack-secure/rori_stack_secure/shell/ec3
-      - ./../share-volume/ssh-server:/src/app/rori-stack-secure/rori_stack_secure/shell/ssh-server
+      - ../share-volume/ec3:/share-volume/ec3
+      - ../share-volume/ssh-server:/share-volume/ssh-server
       - /var/run/docker.sock:/var/run/docker.sock
-  
+
   nginx:
     image: nginx:alpine
     depends_on:
@@ -31,7 +31,7 @@ services:
       MYSQL_PASSWORD: "${DB_USER_PW}"
       MYSQL_ROOT_HOST: "%"
       TZ: "${TZ}"
-  
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     environment:
