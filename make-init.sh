@@ -8,16 +8,22 @@ docker container rm -f ssh-server-ssh-1
 docker container rm -f nginx-proxy-nginx-proxy-1
 
 # docker 
-echo "ec3のイメージ作成"
-docker image rm -f rori_stack/ec3
-cd ec3/
-docker build ./ -t rori_stack/ec3
+echo "ec3(ubuntu, centos)のイメージ作成"
+docker image rm -f rori_stack/ec3_ubuntu
+docker image rm -f rori_stack/ec3_centos
+cd ec3/ubuntu/
+docker build ./ -t rori_stack/ec3_ubuntu
+cd ../../ec3/centos/
+docker build ./ -t rori_stack/ec3_centos
+cd ..
 echo "インフラコンテナ起動"
 cd ../nginx-proxy/
 docker compose up -d
 cd ../ssh-server/
 docker compose up -d
 cd ../secure/
+docker compose up -d
+cd ../admin/
 docker compose up -d
 
 # init

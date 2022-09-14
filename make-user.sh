@@ -12,7 +12,7 @@ docker run --detach -t -i --privileged --name rori_stack_ec3_$app_name --network
 echo "SSHサーバーにユーザーを追加"
 docker cp ./share-volume/ssh-server ssh-server-ssh-1:/ssh-server
 docker exec ssh-server-ssh-1 sh //ssh-server/ssh-key-register.sh $user_name $user_password
-docker restart ssh-server-ssh-1
+# docker restart ssh-server-ssh-1
 
 echo "ユーザーサーバーにユーザーを追加(not root login)"
 docker cp ./share-volume/ec3 rori_stack_ec3_$app_name:/etc/

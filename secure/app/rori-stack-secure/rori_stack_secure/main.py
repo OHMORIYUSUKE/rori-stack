@@ -14,6 +14,7 @@ class UserContainerInfo(BaseModel):
     user_password: str
     user_name: str
     app_name: str
+    os_type: str
     ssh_key: str
 
 @app.get("/")
@@ -30,7 +31,7 @@ async def create_container(userContainerInfo: UserContainerInfo):
     f.write(f'command="docker exec -u {userContainerInfo.user_name} -it rori_stack_ec3_{userContainerInfo.app_name} bash" {userContainerInfo.ssh_key}')
     f.close()
     # コンテナ起動
-    proc = subprocess.run(f"sh {PWD}/shell/make-user.sh {userContainerInfo.user_name} {userContainerInfo.user_password} {userContainerInfo.app_name}", timeout=100, shell=True, stdout=PIPE, stderr=PIPE, text=True)
+    proc = subprocess.run(f"sh {PWD}/shell/make-user.sh {userContainerInfo.user_name} {userContainerInfo.user_password} {userContainerInfo.app_name} {userContainerInfo.os_type}", timeout=100, shell=True, stdout=PIPE, stderr=PIPE, text=True)
     out = proc.stdout
     err = proc.stderr
     if out != '':
