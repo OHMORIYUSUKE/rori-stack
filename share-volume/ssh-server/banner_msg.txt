@@ -16,7 +16,7 @@
 
 # EC3
 
-## OS : ubuntu:20.04
+## OS : ubuntu:20.04 or CentOS:7
 
 It is a container-based Linux virtual environment. Port forwarding is only on port 80. Let's publish a web application. You can use the systemctl command.
 

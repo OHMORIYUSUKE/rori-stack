@@ -88,6 +88,10 @@ $ sudo systemctl start nginx
 
 完了したら、ブラウザから`http://u-tan-app.ec3.example.local`にアクセス。インストールした WEB サーバーが表示されたら成功。
 
+## volume の解説
+
+ssh-server コンテナの`/share-volume/ssh-server/`ディレクトリと secure コンテナの`/ssh-server/`ディレクトリの中身は常に同期されている。そのため、secure コンテナの`/ssh-server/`ディレクトリに保存された ssh 鍵は ssh-server コンテナから操作することができる。
+
 ### おかしな挙動の解決策
 
 #### mysql

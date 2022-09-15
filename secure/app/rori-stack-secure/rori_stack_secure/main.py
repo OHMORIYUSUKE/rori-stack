@@ -25,12 +25,14 @@ async def root():
 @app.post("/create/container")
 async def create_container(userContainerInfo: UserContainerInfo):
     # ssh鍵書き込み
+    # /share-volume/ssh-server/user-keys/ディレクトリにuser名のディレクトリを作成し、その中にssh鍵を保存する
     PWD = "/src/app/rori-stack-secure/rori_stack_secure"
     os.makedirs(f'/share-volume/ssh-server/user-keys/{userContainerInfo.user_name}', exist_ok=True)
     f = open(f'/share-volume/ssh-server/user-keys/{userContainerInfo.user_name}/id_rsa.pub', 'w')
     f.write(f'command="docker exec -u {userContainerInfo.user_name} -it rori_stack_ec3_{userContainerInfo.app_name} bash" {userContainerInfo.ssh_key}')
     f.close()
     # コンテナ起動
+    # pythonからshellを実行
     proc = subprocess.run(f"sh {PWD}/shell/make-user.sh {userContainerInfo.user_name} {userContainerInfo.user_password} {userContainerInfo.app_name} {userContainerInfo.os_type}", timeout=100, shell=True, stdout=PIPE, stderr=PIPE, text=True)
     out = proc.stdout
     err = proc.stderr
