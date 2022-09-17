@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   nginx-proxy:
@@ -8,7 +8,7 @@ services:
       - 80:80
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - ./html/custom_pages:/etc/nginx/html/custom_pages
+      - ./html/:/usr/share/nginx/html
 
 networks:
   default:
